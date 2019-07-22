@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
 
                     /* changing of farenheit to celsius
                     (32°F − 32) × 5/9 = 0°C*/
-                    let celsius = Math.round((temperature - 32) * (5/9))    ;
+                    let celsius = Math.round((temperature - 32) * (5/9)).toFixed(1);
                     //Set Icon
                     setIcons(icon, document.querySelector(".icon"));
 
@@ -40,6 +40,7 @@ window.addEventListener("load", () => {
                             temperatureDegree.textContent = celsius;
                         } else {
                             temperatureSpan.textContent = "F";
+                            temperatureDegree.textContent = temperature;
                         }
                     });
                 });
