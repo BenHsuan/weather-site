@@ -1,10 +1,10 @@
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
     let long;
     let lat;
-    let tempertureDescription = document.querySelector(".temperature-description");
-    let tempertureDegree = document.querySelector(".temperature-degree");
+    let temperatureDescription = document.querySelector(".temperature-description");
+    let temperatureDegree = document.querySelector(".temperature-degree");
     let locationTimezone = document.querySelector(".location-timezone");
-    let temperatureSection = document.querySelector(".temepature");
+    let temperatureSection = document.querySelector(".temperature");
     const temperatureSpan = document.querySelector(".temperature span");
 
     if (navigator.geolocation) {
@@ -22,22 +22,26 @@ window.addEventListener('load', () => {
                 .then(data => {
                     const { temperature, summary, icon } = data.currently;
                     //Set DOM Elements from the API
+
+                    temperatureDegree.textContent = temperature;
+                    temperatureDescription.textContent = summary;
+                    locationTimezone.textContent = data.timezone;
+
                     /* changing of farenheit to celsius
                     (32°F − 32) × 5/9 = 0°C*/
-                    tempertureDegree.textContent = temperature;
-                    tempertureDescription.textContent = summary;
-                    locationTimezone.textContent = data.timezone;
+                    let celsius = Math.round((temperature - 32) * (5/9))    ;
                     //Set Icon
                     setIcons(icon, document.querySelector(".icon"));
+
                     //Change temperature to Celsius/Farenheit
                     temperatureSection.addEventListener("click", () => {
                         if (temperatureSpan.textContent === "F") {
                             temperatureSpan.textContent = "C";
+                            temperatureDegree.textContent = celsius;
                         } else {
                             temperatureSpan.textContent = "F";
                         }
-                    }
-                    )
+                    });
                 });
         });
 
